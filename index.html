@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Promise</title>
+</head>
+
+<body>
+    <h1 class="title">Пошук поста за ідентифікатором (ID)</h1>
+
+    <form id="formContainer" class="flex">
+        <label for="postIdInputElement" class="labelPost">Введіть ID поста (від 1 до 100): </label>
+        <input type="number" id="postIdInputElement">
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    <div id="modalContainer">
+        <div class="modalContainer">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <div id="messageContainer"></div>
+
+    <div id="postContainer"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
