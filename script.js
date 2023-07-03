@@ -1,11 +1,12 @@
 "use strict";
+
 function getPost(event) {
   event.preventDefault();
 
   const { value: postId } = document.getElementById("postIdInputElement");
 
   const messageContainer = document.getElementById("messageContainer");
-  messageContainer.innerHTML = "";
+  clearContainer(messageContainer);
 
   if (isNaN(postId) || postId < 1 || postId > 100) {
     openModalWindow(`Пост не знайдено. Введіть номер ID від 1 до 100`);
@@ -20,11 +21,16 @@ function getPost(event) {
       return response.json();
     })
     .then(({ title, body }) => {
-      postContainer.innerHTML = `
-      <h2 class="secondtTitle">${title}</h2>
-      <p>${body}</p>
-      <button class="btn" onclick="getComments('${postId}')">Comments</button>
-    `;
+      const postContainer = document.getElementById("postContainer");
+      clearContainer(postContainer);
+
+      const postTitle = createElement("h2", "secondtTitle", title);
+      const postBody = createElement("p", "", body);
+
+      const commentsButton = createElement("button", "btn", "Comments");
+      commentsButton.addEventListener("click", () => getComments(postId));
+
+      appendChildren(postContainer, [postTitle, postBody, commentsButton]);
     })
     .catch((error) => {
       openModalWindow(`Сталася помилка: ${error.message}`);
@@ -33,9 +39,6 @@ function getPost(event) {
 }
 
 function getComments(postId) {
-  const postContainer = document.getElementById("postContainer");
-  postContainer.innerHTML = "";
-
   fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
     .then((response) => {
       if (!response.ok) {
@@ -44,13 +47,15 @@ function getComments(postId) {
       return response.json();
     })
     .then((comments) => {
+      const postContainer = document.getElementById("postContainer");
+      clearContainer(postContainer);
+
       const commentsList = document.createElement("ul");
       comments.forEach((comment) => {
-        const commentItem = document.createElement("li");
-        commentItem.className = "num";
-        commentItem.textContent = comment.body;
+        const commentItem = createElement("li", "num", comment.body);
         commentsList.appendChild(commentItem);
       });
+
       postContainer.appendChild(commentsList);
     })
     .catch((error) => {
@@ -65,10 +70,6 @@ function openModalWindow(message) {
 
   modalMessage.textContent = message;
   modalContainer.style.display = "block";
-
-  const close = document.querySelector(".close");
-  close.addEventListener("click", closeModalWindow);
-  window.addEventListener("click", сlickOutside);
 }
 
 function closeModalWindow() {
@@ -76,11 +77,38 @@ function closeModalWindow() {
   modalContainer.style.display = "none";
 }
 
-function сlickOutside(event) {
+function clickOutside(event) {
   const modalContainer = document.getElementById("modalContainer");
-  if (event.target == modalContainer) {
+  if (event.target === modalContainer) {
     closeModalWindow();
   }
 }
+
+function clearContainer(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+}
+
+function createElement(tagName, className, textContent) {
+  const element = document.createElement(tagName);
+  if (className) {
+    element.className = className;
+  }
+  if (textContent) {
+    element.textContent = textContent;
+  }
+  return element;
+}
+
+function appendChildren(parent, children) {
+  children.forEach((child) => {
+    parent.appendChild(child);
+  });
+}
+
+const close = document.querySelector(".close");
+close.addEventListener("click", closeModalWindow);
+window.addEventListener("click", clickOutside);
 
 document.getElementById("formContainer").addEventListener("submit", getPost);
