@@ -1,0 +1,114 @@
+body {
+  font-family: Andale Mono, monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  color: #161513;
+  background-color: #f2f1ef;
+}
+
+.title {
+  font-size: 40px;
+  margin: 40px;
+  text-align: center;
+}
+
+.secondtTitle {
+  color: #e94d35;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.labelPost {
+  display: block;
+  margin-bottom: 20px;
+  color: #e94d35;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 5px solid #161513;
+  color: #e94d35;
+  box-shadow: 0 4px 8px #ba1c04;
+}
+
+.btn {
+  padding: 15px 30px;
+  background-color: #161513;
+  color: rgb(251, 251, 251);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px #302525;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e94d35;
+  box-shadow: 0 4px 8px #ba1c04;
+}
+
+#postContainer {
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.num {
+  margin-bottom: 1em;
+  list-style: decimal;
+  color: #e94d35;
+}
+
+#modalContainer {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #e6e3de;
+}
+
+.modalContainer {
+  background-color: #fcfefff1;
+  margin: 20% auto;
+  padding: 20px;
+  border: 5px solid #0c4365;
+  max-width: 500px;
+}
+
+#modalMessage {
+  color: #e94d35;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.close {
+  color: #0c4365;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #e94d35;
+  text-decoration: none;
+  cursor: pointer;
+}
