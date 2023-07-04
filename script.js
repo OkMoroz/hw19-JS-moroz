@@ -51,11 +51,14 @@ function getComments(postId) {
       clearContainer(postContainer);
 
       const commentsList = document.createElement("ul");
-      comments.forEach((comment) => {
-        const commentItem = createElement("li", "num", comment.body);
+      // comments.forEach((comment) => {
+      //   const commentItem = createElement("li", "num", comment.body);
+      //   commentsList.appendChild(commentItem);
+      // });
+      comments.forEach(({ body }) => {
+        const commentItem = createElement("li", "num", body);
         commentsList.appendChild(commentItem);
       });
-
       postContainer.appendChild(commentsList);
     })
     .catch((error) => {
